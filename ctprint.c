@@ -74,8 +74,8 @@ int main()
 {
 	for(unsigned u=0; u<256; ++u)
 	{
-		snprintf(buffer,15, "<%c> ", u);
-		ctprint(buffer, 4);
+		snprintf(buffer,15, " %c ", u);
+		ctprint(buffer, 3);
 		if(u%16 == 15)
 		{
 			putchar('\n');
