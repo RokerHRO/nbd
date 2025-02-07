@@ -20,13 +20,13 @@ void construct_path(char* name, int lenmax, off_t size, off_t pos, off_t* ppos) 
 
 	if (size<TREEDIRSIZE*TREEPAGESIZE) {
 		// we are done, add filename
-		snprintf(name,lenmax,"/FILE%04" PRIX64,(pos/TREEPAGESIZE) % TREEDIRSIZE);
+		snprintf(name,lenmax,"/%04" PRIX64 ".bin",(pos/TREEPAGESIZE) % TREEDIRSIZE);
 		*ppos = pos / (TREEPAGESIZE*TREEDIRSIZE);
 	} else {
-		construct_path(name+9,lenmax-9,size/TREEDIRSIZE,pos,ppos);
+		construct_path(name+5,lenmax-5,size/TREEDIRSIZE,pos,ppos);
 		char buffer[10];
-		snprintf(buffer,sizeof(buffer),"/TREE%04jX",(intmax_t)(*ppos % TREEDIRSIZE));
-		memcpy(name,buffer,9); // copy into string without trailing zero
+		snprintf(buffer,sizeof(buffer),"/%04jX",(intmax_t)(*ppos % TREEDIRSIZE));
+		memcpy(name,buffer,5); // copy into string without trailing zero
 		*ppos/=TREEDIRSIZE;
 	}
 }
