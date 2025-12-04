@@ -18,10 +18,10 @@ void construct_path(char* name, int lenmax, off_t size, off_t pos, off_t* ppos) 
 	if (lenmax<10)
 		err("Char buffer overflow. This is likely a bug.");
 
-	if (size<TREEDIRSIZE*TREEPAGESIZE) {
+	if (size<(off_t)TREEDIRSIZE*TREEPAGESIZE) {
 		// we are done, add filename
 		snprintf(name,lenmax,"/FILE%04" PRIX64,(pos/TREEPAGESIZE) % TREEDIRSIZE);
-		*ppos = pos / (TREEPAGESIZE*TREEDIRSIZE);
+		*ppos = pos / ((off_t)TREEPAGESIZE*TREEDIRSIZE);
 	} else {
 		construct_path(name+9,lenmax-9,size/TREEDIRSIZE,pos,ppos);
 		char buffer[10];

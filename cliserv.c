@@ -117,10 +117,9 @@ uint64_t ntohll(uint64_t a) {
  * @return 0 on completion, or -1 on failure
  **/
 int readit(int f, void *buf, size_t len) {
-	ssize_t res;
 	while (len > 0) {
 		DEBUG("*");
-		res = read(f, buf, len);
+		ssize_t res = read(f, buf, len);
 		if (res > 0) {
 			len -= res;
 			buf += res;

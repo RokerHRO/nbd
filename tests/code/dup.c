@@ -17,7 +17,6 @@ int stringcmp(const char* a, const char* b) {
 }
 
 int main(void) {
-	SERVER *srvd;
 	SERVER srvs = {
 		.exportname = "foo",
 		.expected_size = 0,
@@ -34,7 +33,7 @@ int main(void) {
 		.cowdir = "/tmp",
 	};
 
-	srvd = dup_serve(&srvs);
+	SERVER *srvd = dup_serve(&srvs);
 
 	count_assert(&srvs != srvd);
 	count_assert(stringcmp(srvs.exportname, srvd->exportname) == 0);

@@ -33,8 +33,8 @@ bool address_matches(const char* mask, const struct sockaddr* addr, GError** err
 	struct addrinfo *res, *aitmp, hints;
 	char *masksep;
 	char privmask[strlen(mask)+1];
-	int masklen;
-	int addrlen = addr->sa_family == AF_INET ? 4 : 16;
+	long masklen = 0;
+	long addrlen = addr->sa_family == AF_INET ? 4 : 16;
 #define IPV4_MAP_PREFIX 12
 	uint8_t ipv4_mapped[IPV4_MAP_PREFIX+4] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		255, 255, 0, 0, 0, 0};
